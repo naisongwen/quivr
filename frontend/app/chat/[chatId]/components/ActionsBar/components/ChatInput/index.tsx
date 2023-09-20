@@ -1,7 +1,7 @@
 /* eslint-disable */
 "use client";
 import { useTranslation } from "react-i18next";
-import { MdAddCircle, MdSend } from "react-icons/md";
+import { MdCloudUpload, MdSend } from "react-icons/md";
 
 import Button from "@/lib/components/ui/Button";
 import { useBrainContext } from "@/lib/context/BrainProvider/hooks/useBrainContext";
@@ -24,11 +24,12 @@ export const ChatInput = ({
   setShouldDisplayUploadCard,
   hasContentToFeedBrain,
 }: ChatInputProps): JSX.Element => {
-  const { setMessage, submitQuestion, chatId, generatingAnswer, message } = useChatInput();
+  const { setMessage, submitQuestion, chatId, generatingAnswer, message } =
+    useChatInput();
   const { t } = useTranslation(["chat"]);
   const { currentBrainId } = useBrainContext();
 
-  const isEmptyMessage = !message || message.trim() === '';
+  const isEmptyMessage = !message || message.trim() === "";
 
   return (
     <form
@@ -46,8 +47,9 @@ export const ChatInput = ({
           data-testid="upload-button"
           type="button"
           onClick={() => setShouldDisplayUploadCard(true)}
+          tooltip={t("add_content_card_button_tooltip")}
         >
-          <MdAddCircle className="text-3xl" />
+          <MdCloudUpload className="text-3xl" />
         </Button>
       )}
 
