@@ -136,7 +136,8 @@ CREATE TABLE IF NOT EXISTS brains (
   max_tokens INT,
   temperature FLOAT,
   openai_api_key TEXT,
-  prompt_id UUID REFERENCES prompts(id)
+  prompt_id UUID REFERENCES prompts(id),
+  last_update TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 
@@ -232,7 +233,7 @@ CREATE TABLE IF NOT EXISTS user_settings (
   models JSONB DEFAULT '["gpt-3.5-turbo"]'::jsonb,
   max_requests_number INT DEFAULT 50,
   max_brains INT DEFAULT 5,
-  max_brain_size INT DEFAULT 1000000
+  max_brain_size INT DEFAULT 10000000
 );
 
 -- knowledge table
@@ -269,9 +270,9 @@ CREATE POLICY "Access Quivr Storage 1jccrwz_2" ON storage.objects FOR UPDATE TO 
 CREATE POLICY "Access Quivr Storage 1jccrwz_3" ON storage.objects FOR DELETE TO anon USING (bucket_id = 'quivr');
 
 INSERT INTO migrations (name) 
-SELECT '202309151054032_add_knowledge_tables'
+SELECT '20230921160000_add_last_update_field_to_brain'
 WHERE NOT EXISTS (
-    SELECT 1 FROM migrations WHERE name = '202309151054032_add_knowledge_tables'
+    SELECT 1 FROM migrations WHERE name = '20230921160000_add_last_update_field_to_brain'
 );
 
 

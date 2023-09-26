@@ -33,4 +33,12 @@ export type BackendMinimalBrainForUser = Omit<MinimalBrainForUser, "role"> & {
   rights: BrainRoleType;
 };
 
+export type PublicBrain = {
+  id: UUID;
+  name: string;
+  description?: string;
+  number_of_subscribers: number;
+  last_update: string;
+};
+
 export type BrainContextType = ReturnType<typeof useBrainProvider>;
